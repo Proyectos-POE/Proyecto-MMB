@@ -24,8 +24,8 @@ import tipografiam.Fuentes;
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
  * @author Yenny Rivas Tello <yenny.rivas@correounivalle.edu.co>
  */
-public class VentanaParaQueSirve extends JFrame{
-    
+public class VentanaParaQueSirve extends JFrame
+{
     Color moradoClaro;
     Color morado;
 
@@ -36,12 +36,13 @@ public class VentanaParaQueSirve extends JFrame{
     private JButton btnMenuPrincipal;
     private JTextArea areaParaQue;
     
-    public VentanaParaQueSirve(){
-    inicializarComponentes();
-}
+    public VentanaParaQueSirve()
+    {
+        inicializarComponentes();
+    }
 
-    private void inicializarComponentes() {
-
+    private void inicializarComponentes() 
+    {
         setTitle("Memorabble-Para Que Sirve");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
@@ -99,22 +100,21 @@ public class VentanaParaQueSirve extends JFrame{
         setVisible(true);
     }
     
-    class ManejadoraDeEventos implements ActionListener{
-
+    class ManejadoraDeEventos implements ActionListener
+    {
         @Override
-        public void actionPerformed(ActionEvent evento) {
+        public void actionPerformed(ActionEvent evento) 
+        {
             if(evento.getSource() == btnMenuPrincipal)
             {                
                 abrirMenuPrincipal();
             }
-
         }  
-
-
     }
 
-    class ManejadoraDeMouse extends MouseAdapter{
-
+    class ManejadoraDeMouse extends MouseAdapter
+    {
+        @Override
         public void mouseEntered(MouseEvent arg0) 
         {
             ((JButton) arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
@@ -125,11 +125,11 @@ public class VentanaParaQueSirve extends JFrame{
         {  
             ((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
         } 
-
     }
     
-    private void abrirMenuPrincipal() {
-        //VentanaMenu ventana = new VentanaMenu();
-        //dispose();
-        }
+    private void abrirMenuPrincipal() 
+    {
+        VentanaMenu ventana = new VentanaMenu();
+        dispose();
+    }
 }
