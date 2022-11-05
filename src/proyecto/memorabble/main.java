@@ -4,6 +4,8 @@
  */
 package proyecto.memorabble;
 
+import vista.VentanaMenu;
+
 /**
  *
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
@@ -18,5 +20,6 @@ public class main
     public static void main(String[] args) 
     {
         // TODO code application logic here
+        VentanaMenu ventana= new VentanaMenu();
     }  
 }
