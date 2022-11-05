@@ -36,12 +36,13 @@ public class VentanaParaQueSirve extends JFrame{
     private JButton btnMenuPrincipal;
     private JTextArea areaParaQue;
     
-    public VentanaParaQueSirve(){
+    public VentanaParaQueSirve()
+    {
     inicializarComponentes();
-}
+    }
 
-    private void inicializarComponentes() {
-
+    private void inicializarComponentes() 
+    {
         setTitle("Memorabble-Para Que Sirve");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
@@ -99,22 +100,22 @@ public class VentanaParaQueSirve extends JFrame{
         setVisible(true);
     }
     
-    class ManejadoraDeEventos implements ActionListener{
-
+    class ManejadoraDeEventos implements ActionListener
+    {
         @Override
-        public void actionPerformed(ActionEvent evento) {
+        public void actionPerformed(ActionEvent evento) 
+        {
             if(evento.getSource() == btnMenuPrincipal)
             {                
                 abrirMenuPrincipal();
             }
 
         }  
-
-
     }
 
-    class ManejadoraDeMouse extends MouseAdapter{
-
+    class ManejadoraDeMouse extends MouseAdapter
+    {
+        @Override
         public void mouseEntered(MouseEvent arg0) 
         {
             ((JButton) arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
@@ -125,11 +126,11 @@ public class VentanaParaQueSirve extends JFrame{
         {  
             ((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
         } 
-
     }
     
-    private void abrirMenuPrincipal() {
-        //VentanaMenu ventana = new VentanaMenu();
-        //dispose();
-        }
+    private void abrirMenuPrincipal() 
+    {
+        VentanaMenu menu = new VentanaMenu();
+        dispose();
+    }
 }

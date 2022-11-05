@@ -12,7 +12,6 @@ package logica;
  */
 public class Jugador 
 {
-    
     private String nombre;
     private int puntuacion;
     private int vidas;
@@ -22,7 +21,7 @@ public class Jugador
     public Jugador() 
     {
          puntuacion=0;
-         vidas=0;
+         vidas=3;
          cantidadAciertos=0;
          cantidadFallos=0;
     }
@@ -30,7 +29,7 @@ public class Jugador
     { 
         return nombre;
     }   
-    public void SetNombre(String nombre)
+    public void setNombre(String nombre)
     {
         this.nombre = nombre;
     }

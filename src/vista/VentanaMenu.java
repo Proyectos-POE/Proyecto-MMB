@@ -7,6 +7,7 @@ package vista;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -20,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import logica.Jugador;
 import tipografiam.Fuentes;
 
 /**
@@ -28,8 +30,8 @@ import tipografiam.Fuentes;
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
  * @author Yenny Rivas Tello <yenny.rivas@correounivalle.edu.co>
  */
-public class VentanaMenu extends JFrame{
-    
+public class VentanaMenu extends JFrame
+{  
     Color moradoClaro;
     Color morado;
 
@@ -44,12 +46,13 @@ public class VentanaMenu extends JFrame{
     private JLabel lblNombre;
     
     
-    public VentanaMenu(){
+    public VentanaMenu()
+    {
         inicializarComponentes();
     }
 
-    private void inicializarComponentes() {
-        
+    private void inicializarComponentes() 
+    {    
         setTitle("Memorabble-Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
@@ -100,22 +103,17 @@ public class VentanaMenu extends JFrame{
         boxNombre.setBounds(270, 310, 180, 40);
         boxNombre.setHorizontalAlignment(JTextField.CENTER);
         boxNombre.setFocusable(true);
-        boxNombre.addKeyListener(new KeyListener(){
-            public void keyTyped(KeyEvent e)
- 
+        boxNombre.addKeyListener(new KeyAdapter()
         {
-        if (boxNombre.getText().length()== 12)
- 
-            e.consume();
-        }
- 
-        public void keyPressed(KeyEvent arg0) {
-        }
- 
-        public void keyReleased(KeyEvent arg0) {
-        }
-    
+            public void keyTyped(KeyEvent e)
+            {
+                if (boxNombre.getText().length()== 12)
+                    {
+                        e.consume();
+                    }         
+                }
         });
+        
         jpContenido.add(boxNombre);
         
         btnParaQueSirve = new JButton("Para que sirve");
@@ -144,47 +142,49 @@ public class VentanaMenu extends JFrame{
         
         this.getContentPane().add(jpContenido);
         this.getContentPane().add(jpFondo);
-        setVisible(true);
-        
-        
+        setVisible(true);  
     }
 
-    private void mostrarParaQueSirve() {
-        //VentanaParaQueSirve paraQueSirve = new VentanaParaQueSirve;
-        //dispose();
-        }
+    private void mostrarParaQueSirve() 
+    {
+        VentanaParaQueSirve paraQueSirve = new VentanaParaQueSirve();
+        dispose();
+    }
     
-    private void mostrarInstrucciones() {
+    private void mostrarInstrucciones() 
+    {
         //VentanaInstrucciones instrucciones = new VentanaInstrucciones;
         //dispose();
-        }
+    }
     
-    private void iniciarJuego(){
-        
+    private void iniciarJuego()
+    { 
         boolean nombreCompleto = false;
         String nombre = boxNombre.getText();
         
-        if(!nombre.trim().isEmpty()){
+        if(!nombre.trim().isEmpty())
+        {
             nombreCompleto =true;
         }
-        
         else 
         {
             JOptionPane.showMessageDialog(null,"Por favor ingrese su nombre","Advertencia", JOptionPane.ERROR_MESSAGE);
             boxNombre.requestFocusInWindow();
         }
-        if(nombreCompleto){
-            /* Jugador jugador = new Jugador();
+        if(nombreCompleto)
+        {
+            Jugador jugador = new Jugador();
             jugador.setNombre(nombre);
             VentanaJuego ventanaJuego = new VentanaJuego(jugador);  
-            dispose(); */
+            dispose();
         }
     }
             
-    class ManejadoraDeEventos implements ActionListener{
-
+    class ManejadoraDeEventos implements ActionListener
+    {
         @Override
-        public void actionPerformed(ActionEvent evento) {
+        public void actionPerformed(ActionEvent evento) 
+        {
             if(evento.getSource() == btnJugar)
             {                
                 iniciarJuego();
@@ -200,8 +200,9 @@ public class VentanaMenu extends JFrame{
         }  
     }
 
-    class ManejadoraDeMouse extends MouseAdapter{
-        
+    class ManejadoraDeMouse extends MouseAdapter
+    {
+        @Override
         public void mouseEntered(MouseEvent arg0) 
         {
             ((JButton) arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
@@ -212,6 +213,5 @@ public class VentanaMenu extends JFrame{
         {  
             ((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
         } 
-
     }
 }

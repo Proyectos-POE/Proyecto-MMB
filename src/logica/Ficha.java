@@ -12,7 +12,6 @@ package logica;
  */
 public class Ficha 
 {
-    
     private String forma;
     private String color;
     private String dirImagen;
@@ -20,7 +19,10 @@ public class Ficha
     
     public Ficha()
     {
-        
+        forma = "";
+        color = "";
+        dirImagen="";
+        adivinada = false;
     }
     public void SetColor(String color)
     {
@@ -37,6 +39,10 @@ public class Ficha
     public String getForma()
     {
         return forma;
+    }
+    public void asignarImagen()
+    {
+        dirImagen = "/imagenesFichas/"+forma+color+".png";
     }
     public String getDirImagen()
     {

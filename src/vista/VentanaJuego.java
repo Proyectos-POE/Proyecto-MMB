@@ -31,6 +31,7 @@ import tipografiam.Fuentes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import logica.Jugador;
 
 /**
  *
@@ -56,7 +57,7 @@ public class VentanaJuego extends JFrame
     private JLabel lblMensaje;
     private JLabel lblTiempoyFicha;
     
-    public VentanaJuego(/**Jugador jugador*/)
+    public VentanaJuego(Jugador jugador)
     {
         /*juegoAhorcado = new JuegoAhorcado(jugador);*/
         /*juegoAhorcado.iniciarRonda();*/
