@@ -29,7 +29,7 @@ public class Jugador
     public String getNombre()
     { 
         return nombre;
-    }
+    }   
     
     public void setNombre(String nombre)
     {
@@ -41,7 +41,7 @@ public class Jugador
         return vidas;
     }
     
-    private void disminuirVidas()
+    public void disminuirVidas()
     { 
         vidas--;
     }
@@ -51,12 +51,12 @@ public class Jugador
         return puntuacion;
     }
     
-    private void aumentarPuntuacion()
+    public void aumentarPuntuacion()
     {
         puntuacion=puntuacion+100;
     }
     
-    public int getCantudadAciertos()
+    public int getCantidadAciertos()
     {
         return cantidadAciertos;
     }
@@ -66,12 +66,12 @@ public class Jugador
         cantidadAciertos++;   
     }
     
-    public int getCantidaFallos()
+    public int getCantidadFallos()
     {
         return cantidadFallos;
     }
     
-    private void aumentarFallos()
+    public void aumentarFallos()
     {
         cantidadFallos++;
     }
