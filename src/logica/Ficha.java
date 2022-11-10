@@ -60,8 +60,8 @@ public class Ficha
          this.adivinada = adivinoFicha;
     }
     
-    public void adivinaFicha()
+    public boolean esAdivinada()
     {
-         return adivinada;
+        return adivinada;
     }
 }
