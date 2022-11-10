@@ -60,8 +60,8 @@ public class Jugador
     {
         return cantidadAciertos;
     }
-    
-    public void aumentarAciertos()
+
+    private void aumentarAciertos()
     {
         cantidadAciertos++;   
     }

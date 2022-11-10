@@ -52,7 +52,7 @@ public class VentanaMenu extends JFrame
     }
 
     private void inicializarComponentes() 
-    {
+    {    
         setTitle("Memorabble-Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
@@ -108,10 +108,10 @@ public class VentanaMenu extends JFrame
             public void keyTyped(KeyEvent e)
             {
                 if (boxNombre.getText().length()== 12)
-                    {
-                        e.consume();
-                    }         
-                }
+                {
+                     e.consume();
+                }   
+            }
         });
         
         jpContenido.add(boxNombre);

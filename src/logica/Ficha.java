@@ -47,7 +47,7 @@ public class Ficha
     
     public void asignarImagen()
     {
-        this.dirImagen = "/imagenesFichas/"+forma+color+".png";
+       this.dirImagen = "/imagenesFichas/"+forma+color+".png";
     }
     
     public String getDirImagen()
@@ -60,7 +60,7 @@ public class Ficha
          this.adivinada = adivinoFicha;
     }
     
-    public boolean esAdivinada()
+    public void adivinaFicha()
     {
          return adivinada;
     }
