@@ -52,7 +52,7 @@ public class VentanaMenu extends JFrame
     }
 
     private void inicializarComponentes() 
-    {
+    {    
         setTitle("Memorabble-Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
@@ -108,11 +108,12 @@ public class VentanaMenu extends JFrame
             public void keyTyped(KeyEvent e)
             {
                 if (boxNombre.getText().length()== 12)
-                    {
-                        e.consume();
-                    }   
+                {
+                     e.consume();
+                }   
             }
         });
+        
         jpContenido.add(boxNombre);
         
         btnParaQueSirve = new JButton("Para que sirve");
@@ -155,15 +156,14 @@ public class VentanaMenu extends JFrame
     }
     
     private void iniciarJuego()
-    {
-        
+    { 
         boolean nombreCompleto = false;
         String nombre = boxNombre.getText();
         
-        if(!nombre.trim().isEmpty()){
+        if(!nombre.trim().isEmpty())
+        {
             nombreCompleto =true;
         }
-        
         else 
         {
             JOptionPane.showMessageDialog(null,"Por favor ingrese su nombre","Advertencia", JOptionPane.ERROR_MESSAGE);
@@ -180,7 +180,6 @@ public class VentanaMenu extends JFrame
             
     class ManejadoraDeEventos implements ActionListener
     {
-
         @Override
         public void actionPerformed(ActionEvent evento) 
         {

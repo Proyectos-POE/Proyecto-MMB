@@ -24,30 +24,37 @@ public class Ficha
         dirImagen = "";
         adivinada = false;
     }
+    
     public void SetColor(String color)
     {
         this.color = color;
     }
+    
     public String getColor()
     {
         return color;
     }
+    
     public void SetForma(String forma)
     {
         this.forma = forma;
     }
+    
     public String getForma()
     {
         return forma;
     }
+    
     public void asignarImagen()
     {
-        this.dirImagen = "/imagenesFichas/"+forma+color+".png";
+       this.dirImagen = "/imagenesFichas/"+forma+color+".png";
     }
+    
     public String getDirImagen()
     {
         return dirImagen;
     }
+    
     public void adivinaFicha()
     {
          this.adivinada = true;

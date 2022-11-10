@@ -25,42 +25,52 @@ public class Jugador
         cantidadAciertos = 0;
         cantidadFallos = 0;
     }
+    
     public String getNombre()
     { 
         return nombre;
-    }   
+    }
+    
     public void setNombre(String nombre)
     {
         this.nombre = nombre;
     }
+    
     public int getVidas()
     {
         return vidas;
     }
+    
     private void disminuirVidas()
     { 
         vidas--;
     }
+    
     public int getPuntuacion()
     {
         return puntuacion;
     }
+    
     private void aumentarPuntuacion()
     {
         puntuacion=puntuacion+100;
     }
+    
     public int getCantudadAciertos()
     {
         return cantidadAciertos;
     }
+
     private void aumentarAciertos()
     {
         cantidadAciertos++;   
     }
+    
     public int getCantidaFallos()
     {
         return cantidadFallos;
     }
+    
     private void aumentarFallos()
     {
         cantidadFallos++;
