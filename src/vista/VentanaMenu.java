@@ -31,7 +31,7 @@ import tipografiam.Fuentes;
  * @author Yenny Rivas Tello <yenny.rivas@correounivalle.edu.co>
  */
 public class VentanaMenu extends JFrame
-{  
+{ 
     Color moradoClaro;
     Color morado;
 
@@ -52,7 +52,7 @@ public class VentanaMenu extends JFrame
     }
 
     private void inicializarComponentes() 
-    {    
+    {
         setTitle("Memorabble-Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
@@ -137,12 +137,10 @@ public class VentanaMenu extends JFrame
         btnInstrucciones.addActionListener(new ManejadoraDeEventos());
         btnInstrucciones.addMouseListener(new ManejadoraDeMouse());
         jpContenido.add(btnInstrucciones);
-        
-        
-        
+
         this.getContentPane().add(jpContenido);
         this.getContentPane().add(jpFondo);
-        setVisible(true);  
+        setVisible(true);
     }
 
     private void mostrarParaQueSirve() 

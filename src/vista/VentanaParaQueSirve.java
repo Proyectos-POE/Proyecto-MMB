@@ -24,8 +24,8 @@ import tipografiam.Fuentes;
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
  * @author Yenny Rivas Tello <yenny.rivas@correounivalle.edu.co>
  */
-public class VentanaParaQueSirve extends JFrame{
-    
+public class VentanaParaQueSirve extends JFrame
+{
     Color moradoClaro;
     Color morado;
 
@@ -38,7 +38,7 @@ public class VentanaParaQueSirve extends JFrame{
     
     public VentanaParaQueSirve()
     {
-    inicializarComponentes();
+        inicializarComponentes();
     }
 
     private void inicializarComponentes() 
@@ -109,7 +109,6 @@ public class VentanaParaQueSirve extends JFrame{
             {                
                 abrirMenuPrincipal();
             }
-
         }  
     }
 

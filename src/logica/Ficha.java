@@ -21,35 +21,47 @@ public class Ficha
     {
         forma = "";
         color = "";
-        dirImagen="";
+        dirImagen = "";
         adivinada = false;
     }
-    public void SetColor(String color)
+    
+    public void setColor(String color)
     {
         this.color = color;
     }
+    
     public String getColor()
     {
         return color;
     }
-    public void SetForma(String forma)
+    
+    public void setForma(String forma)
     {
         this.forma = forma;
     }
+    
     public String getForma()
     {
         return forma;
     }
+    
     public void asignarImagen()
     {
-        dirImagen = "/imagenesFichas/"+forma+color+".png";
+        this.dirImagen = "/imagenesFichas/"+forma+color+".png";
     }
+    
     public String getDirImagen()
     {
         return dirImagen;
     }
-    public void adivinaFicha()
+    
+    public void setAdivinaFicha(boolean adivinoFicha)
     {
-         this.adivinada = true;
+         this.adivinada = adivinoFicha;
+    }
+    
+    public boolean esAdivinada()
+    {
+         return adivinada;
     }
 }

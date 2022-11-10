@@ -4,26 +4,19 @@
  */
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.LineBorder;
@@ -31,6 +24,9 @@ import tipografiam.Fuentes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import javax.swing.JOptionPane;
+import logica.Ficha;
+import logica.JuegoMemorabble;
 import logica.Jugador;
 
 /**
@@ -40,10 +36,11 @@ import logica.Jugador;
  * @author Yenny Rivas Tello <yenny.rivas@correounivalle.edu.co>
  */
 public class VentanaJuego extends JFrame
-{
-    
+{  
     Color moradoClaro;
     Color morado;
+    
+    JuegoMemorabble juegoMemorabble;
     private Fuentes tipoFuente;
     private FondoVentana jpFondo;
     private JPanel jpSeccionSuperior;
@@ -54,13 +51,14 @@ public class VentanaJuego extends JFrame
     private JLabel lblPuntuacion;
     private JLabel lblVidas;
     private JButton btnFichas[][];
+    private JButton btnTerminarJuego;
     private JLabel lblMensaje;
     private JLabel lblTiempoyFicha;
     
     public VentanaJuego(Jugador jugador)
     {
-        /*juegoAhorcado = new JuegoAhorcado(jugador);*/
-        /*juegoAhorcado.iniciarRonda();*/
+        juegoMemorabble = new JuegoMemorabble(jugador);
+        juegoMemorabble.iniciarRonda();
         inicializarComponentes();
     }
     
@@ -97,7 +95,7 @@ public class VentanaJuego extends JFrame
         btnSonido.putClientProperty("encendido", true);
         btnSonido.addActionListener(new ManejadorDeEventos());
                 
-        lblNombre = new JLabel("NOMBRE: " /*+ juegoMemorabb.getNombreJugador()*/,SwingConstants.CENTER);
+        lblNombre = new JLabel("NOMBRE: " + juegoMemorabble.getNombreJugador(),SwingConstants.CENTER);
         lblNombre.setBounds(80, 7, 240, 60);
         lblNombre.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));  
         lblNombre.setForeground(Color.white);
@@ -105,7 +103,7 @@ public class VentanaJuego extends JFrame
         lblNombre.setBackground(morado);
         lblNombre.setOpaque(true);
         
-        lblPuntuacion = new JLabel("PUNTUACION: ", SwingConstants.CENTER);
+        lblPuntuacion = new JLabel("PUNTUACION: " + juegoMemorabble.getPuntuacionJugador(), SwingConstants.CENTER);
         lblPuntuacion.setBounds(330, 7, 250, 60);
         lblPuntuacion.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));  
         lblPuntuacion.setForeground(Color.white);
@@ -141,8 +139,8 @@ public class VentanaJuego extends JFrame
                 btnFichas[fila][columna] = new JButton();
                 btnFichas[fila][columna].setName("btnFicha");
                 btnFichas[fila][columna].setBorder(BorderFactory.createLineBorder(moradoClaro, 5));
-                btnFichas[fila][columna].setBackground(morado);
-                //btnFichas[fila][columna].setEnabled(false);
+                btnFichas[fila][columna].setBackground(Color.white);
+                btnFichas[fila][columna].setEnabled(false);
                 btnFichas[fila][columna].putClientProperty("fila", fila);
                 btnFichas[fila][columna].putClientProperty("columna", columna);
                 btnFichas[fila][columna].addMouseListener(new ManejadorDeMouse());
@@ -159,15 +157,25 @@ public class VentanaJuego extends JFrame
         jpSeccionInferior.setLayout(null);
         jpSeccionInferior.setOpaque(false);
         
-        lblMensaje = new JLabel("ELIGE UNA CASILLA",SwingConstants.CENTER);
+        btnTerminarJuego = new JButton();
+        btnTerminarJuego.setBounds(10, 12,60, 60);
+        btnTerminarJuego.setIcon(new ImageIcon(Class.class.getResource("/imagenesCerrar/cerrarJuego.png")));
+        btnTerminarJuego.setName("btnSonido");
+        btnTerminarJuego.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));
+        btnTerminarJuego.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
+        btnTerminarJuego.setBackground(morado);
+        btnTerminarJuego.putClientProperty("encendido", true);
+        btnTerminarJuego.addActionListener(new ManejadorDeEventos());
+        
+        lblMensaje = new JLabel("OBSERVE LAS FIGURAS DETENIDAMENTE",SwingConstants.CENTER);
         lblMensaje.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));  
         lblMensaje.setForeground(Color.white);
-        lblMensaje.setBounds(10, 12, 615, 60);
+        lblMensaje.setBounds(80, 12, 545, 60);
         lblMensaje.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
         lblMensaje.setBackground(morado);
         lblMensaje.setOpaque(true);
         
-        lblTiempoyFicha = new JLabel(/*""+juegoMemorabble.getTiempoMostrar(), SwingConstants.CENTER*/);
+        lblTiempoyFicha = new JLabel(""+juegoMemorabble.getTiempoMostrar(), SwingConstants.CENTER);
         lblTiempoyFicha.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));  
         lblTiempoyFicha.setForeground(Color.white);
         lblTiempoyFicha.setBounds(635, 5, 75, 75);
@@ -175,6 +183,7 @@ public class VentanaJuego extends JFrame
         lblTiempoyFicha.setBackground(morado);
         lblTiempoyFicha.setOpaque(true);
         
+        jpSeccionInferior.add(btnTerminarJuego);
         jpSeccionInferior.add(lblMensaje);
         jpSeccionInferior.add(lblTiempoyFicha);
 
@@ -182,159 +191,67 @@ public class VentanaJuego extends JFrame
         this.getContentPane().add(jpSeccionMedia);
         this.getContentPane().add(jpSeccionInferior); 
         this.getContentPane().add(jpFondo); 
-        setVisible(true);         
-        //ocultarFiguras(); 
-          
+        setVisible(true);      
+        asignarFichas();
+        ocultarFichas();     
     }
-     
-    /*private void ocultarFiguras()
+    
+    class ManejadorDeEventos implements ActionListener
     {
-        segundos = juegoMemorable.getTiempoMostar();
-        Timer timer = new Timer( 1000 , null);
-        timer.start();
-        timer.addActionListener(new ActionListener()
+        @Override
+        public void actionPerformed(ActionEvent ae)
         {
-            @Override
-            public void actionPerformed(ActionEvent evt)
+            if(ae.getSource() == btnSonido)
             {
-                segundos--;   
-                actualizarTiempo();
-                if(segundos == 0)
+                if((boolean)btnSonido.getClientProperty("encendido"))
                 {
-                    timer.stop();
-                    lblMensaje.setText("Seleccione las casillas que cumplan con la siguiente condicion");
-                    lblTiempoyFicha.setText("");
-                    lblTiempoyFicha.setBackground(Color.white);
-                    lblTiempoyFicha.setIcon(new ImageIcon(Class.class.getResource("/imagenesCondicion/"+juegoMemorabble.getCondicion()+".png")));
-                    for (JButton[] btnFicha : btnFichas) 
-                    {  
-                        for (JButton btnFicha1 : btnFicha) 
-                        {
-                            btnFicha1.setBackground(morado);
-                            btnFicha1.setIcon(null);
-                            btnFicha1.setEnabled(true); 
-                        }
+                   btnSonido.setIcon(new ImageIcon(Class.class.getResource("/imagenesSonido/sonidoOff.png"))); 
+                   btnSonido.putClientProperty("encendido", false);
+                }
+                else
+                {
+                    btnSonido.setIcon(new ImageIcon(Class.class.getResource("/imagenesSonido/sonidoOn.png"))); 
+                    btnSonido.putClientProperty("encendido", true);
+                }
+                JOptionPane.showMessageDialog(null,juegoMemorabble.getTiempoJuego(),"Advertencia", JOptionPane.ERROR_MESSAGE);        
+            }
+            else if(ae.getSource() == btnTerminarJuego)
+            {
+                cerrarJuego();
+            }
+            else if (ae.getSource() instanceof JButton)
+            {
+                JButton botonSeleccionado = ((JButton)ae.getSource());
+                Ficha fichaSeleccioanda = (Ficha)botonSeleccionado.getClientProperty("ficha");
+                if(juegoMemorabble.esLaFicha(fichaSeleccioanda))
+                { 
+                    actulizarLabelPuntuacion();
+                    actualizarBotonCorrecto(botonSeleccionado, fichaSeleccioanda);
+                    if(juegoMemorabble.sonTodasLasFicha())
+                    { 
+                        actualizarTodosLosBotones();
+                        inicializarComponentesRonda();
                     }
                 }
+                else
+                {   
+                    actualizarBotonIncorrecto(botonSeleccionado);
+                    actualizarLabelVidas();
+                    actualizarTodosLosBotones();
+                    if(juegoMemorabble.terminoJuego())
+                    {
+                        juegoMemorabble.pararContarTiempoJuego();
+                        mostrarResultados();
+                    }
+                    else
+                    {
+                        inicializarComponentesRonda();
+                    }
+                }   
             }
-        });
-    }*/
-    
-    /*private void actualizarTiempo()
-    {
-        lblTiempoyFicha.setText(""+segundos);
-    }*/
-    
-
-    /*
-    private void mostrarFichas(JButton btnFichaSeleccioando, Ficha ficha)
-    {
-        String dirImagen = ficha.getImagen();
-        btnFichaSeleccioando.setIcon(new ImageIcon(Class.class.getResource(dirImagen)));
-        btnFichaSeleccioando.setDisabledIcon(new ImageIcon(Class.class.getResource(dirImagen)));
-    }*/
-    
-    /*private void terminoJuego()
-    {
-        if(!JuegoMemorabble.terminoJuego())
-        {
-            VentanaResultados(JuegoMemorabble.getJugador());
-            dispose();
-        }
-        else
-        {
-            JuegoMemorabble.iniciarRonda();
-        }
-    }*/
-    
-    /*private void noAdivinoFicha(JButton btnFichaSeleccionada)
-    {
-        int vidas = juegoMemorabble.getVidasJugador();
-        lblVidas.setIcon(new ImageIcon(Class.class.getResource("/imagenesVidas/Corazones"+vidas+".png")));
-        btnFichaSeleccionada.setBorder(BorderFactory.createLineBorder(Color.red, 5));
-        for (JButton[] btnFicha : btnFichas) 
-        {  
-            for (JButton btnFicha1 : btnFicha) 
-            {
-                btnFicha1.setEnabled(false);
-                btnFicha1.setBackground(Color.white);
-                Ficha fichaSeleccionada = ((Ficha)btnFicha1.getClientProperty("ficha"));  
-                mostrarFiguras(btnFicha1, fichaSeleccionada);
-            }
-        }
-        terminoJuego();   
-    }
-    
-    private void adivinoFichas(JButton btnFichaSeleccionada)
-    {
-        if(btnFichaSeleccionada.getClientProperty("ficha") instanceof Ficha)
-        {
-            Ficha fichaSeleccioanda = ((Ficha)btnFichaSeleccionada.getClientProperty("ficha"));
-            if(JuegoMemorabble.esLaFicha(fichaSeleccioanda))
-            {
-                btnFichaSeleccionada.setEnabled(false);
-                btnFichaSeleccionada.setBackground(Color.white);
-                mostrarFichas(btnFichaSeleccionada, fichaSeleccioanda); 
-                adivinoTodasLasFichas();
-            }
-            else
-            {   
-                noAdivinoFicha(btnFichaSeleccionada);
-            }   
-        }
-        else
-        {
-            noAdivinoFicha(btnFichaSeleccionada);     
         }
     }
     
-    /*private void adivinoTodasLasFichas()
-    { 
-        if(sonTodasLasFichas())
-        {
-            for (JButton[] btnFicha : btnFichas)
-            {  
-                for (JButton[] btnFicha : btnFichas) 
-                {  
-                     btnFicha1.setEnabled(false);   
-                }
-            }
-            juegoMemorabble.iniciarRonda();
-            asignarFichas();
-            ocultarFichas();
-        }
-    }*/
-    
-    /*private void asignarFichas()
-    {
-        fichasEnRonda = juegoMemorabble.getaFichasEnRonda;
-        for (Ficha fichaEnRonda : fichasEnRonda)
-        {  
-            for (Ficha fichaEnRonda : fichasEnRonda) 
-            {
-                Random r = new Random();
-                int fila = r.nextInt(btnFichas.length-1);
-                int columna = int fila = r.nextInt(btnFichas[0].length-1);
-                btnFichas[fila][columna].setIcon[Class.class.getResource(fichaEnRonda.getImagen());+
-                
-            }
-        }
-        
-    }*/
-    
-    /*private void asignarFichas()
-    {    
-        Ficha fichasEnRonda[] = JuegoMemorabble.getFichasEnRonda();
-        for (int ficha = 0; ficha < fichasEnRonda.length; ficha++) 
-        {
-            Random r = new Random();
-            int fila = r.nextInt(btnFichas.length);
-            int columna = r.nextInt(btnFichas[0].length);
-            btnFichas[fila][columna].putClientProperty("ficha", fichasEnRonda[ficha]);
-            mostrarFichas(btnFichas[fila][columna], fichasEnRonda[ficha]);        
-        }
-    }*/
-
     class ManejadorDeMouse extends MouseAdapter
     {
         @Override       
@@ -366,50 +283,26 @@ public class VentanaJuego extends JFrame
         } 
     }
     
-    class ManejadorDeEventos implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent ae)
-        {
-            if(ae.getSource() == btnSonido)
-            {
-                if((boolean)btnSonido.getClientProperty("encendido"))
-                {
-                   btnSonido.setIcon(new ImageIcon(Class.class.getResource("/imagenesSonido/sonidoOff.png"))); 
-                   btnSonido.putClientProperty("encendido", false);
-                }
-                else
-                {
-                    btnSonido.setIcon(new ImageIcon(Class.class.getResource("/imagenesSonido/sonidoOn.png"))); 
-                    btnSonido.putClientProperty("encendido", true);
-                }
-                
-            }
-            //else if (ae.getSource() instanceof JButton)  
-        }
-    }
-    
     class ManejadorDeKeyBoard extends KeyAdapter
-    {
-        
+    {  
         @Override
         public void keyPressed(KeyEvent e) 
         {
             int columna;
             int fila;
-            Component botonSeleccionado = getFocusOwner();
-            if (botonSeleccionado instanceof JButton)
+            Component botonFocus = getFocusOwner();
+            if (botonFocus instanceof JButton)
             {
-                JButton button = (JButton)botonSeleccionado;
-                columna = (int)button.getClientProperty("columna");
-                fila = (int)button.getClientProperty("fila");
+                JButton botonSeleccionado = (JButton)botonFocus;
+                columna = (int)botonSeleccionado.getClientProperty("columna");
+                fila = (int)botonSeleccionado.getClientProperty("fila");
             }
             else
             {
                 columna = 0;
                 fila = 0;
             }
-
+            
             int c = e.getKeyCode();
             switch (c) 
             {
@@ -418,7 +311,7 @@ public class VentanaJuego extends JFrame
                     {
                         if(btnFichas[fila-1][columna].isEnabled())
                         {
-                            ((JButton)botonSeleccionado).setBorder(BorderFactory.createLineBorder(moradoClaro, 5));;
+                            btnFichas[fila][columna].setBorder(BorderFactory.createLineBorder(moradoClaro, 5));;
                             btnFichas[fila-1][columna].setBorder(BorderFactory.createLineBorder(Color.black, 5));
                             btnFichas[fila-1][columna].requestFocus();
                         }
@@ -488,13 +381,197 @@ public class VentanaJuego extends JFrame
             
             if(c == KeyEvent.VK_ENTER || c == KeyEvent.VK_SPACE)
             {
-                if (botonSeleccionado instanceof JButton)
+                if (botonFocus instanceof JButton)
                 { 
-                    ((JButton)botonSeleccionado).doClick();
+                    ((JButton)botonFocus).doClick();
                     
                 }
             }
         }
     }
+     
+    private void actualizarBotonCorrecto(JButton botonSeleccionado,  Ficha fichaSeleccioanda)
+    {
+        botonSeleccionado.setEnabled(false);
+        botonSeleccionado.setBackground(Color.white);
+        botonSeleccionado.setBorder(BorderFactory.createLineBorder(Color.green.darker(), 5));
+        mostrarFicha(botonSeleccionado, fichaSeleccioanda);
+    }
+    
+    private void actualizarBotonIncorrecto(JButton botonSeleccionado)
+    {
+        botonSeleccionado.setBorder(BorderFactory.createLineBorder(Color.red.darker(), 5));
+    }
+    
+    private void actualizarTodosLosBotones()
+    {
+        for (JButton[] btnFicha : btnFichas) 
+        {  
+            for (JButton btnFicha1 : btnFicha) 
+            {
+                btnFicha1.setEnabled(false);
+                btnFicha1.setBackground(Color.white);
+                Ficha fichaSeleccionada = ((Ficha)btnFicha1.getClientProperty("ficha"));
+                if(fichaSeleccionada != null)
+                {
+                    mostrarFicha(btnFicha1, fichaSeleccionada);
+                    btnFicha1.putClientProperty("ficha", null);
+                }            
+            }
+        }
+    }
+    
+    private void actualizarTiempo()
+    {
+        lblTiempoyFicha.setText(""+juegoMemorabble.getTiempoMostrar());
+    }
+    
+    private void actulizarLabelPuntuacion()
+    {
+        lblPuntuacion.setText("PUNTUACION: " + juegoMemorabble.getPuntuacionJugador());
+    }
+    
+    private void actualizarLabelVidas()
+    {
+        lblVidas.setIcon(new ImageIcon(Class.class.getResource("/imagenesVidas/Corazones" + juegoMemorabble.getVidasJugador() + ".png")));
+    }
+    
+    private void actualizarLabelMensaje()
+    {
+        lblMensaje.setText("SELECCIONE LAS CASILLAS CORRECTA");
+    }
+    
+    private void asignarFichas()
+    {       
+        Ficha[] fichasEnRonda = juegoMemorabble.getFichasEnRonda();
+        Random r = new Random();
+        for (int ficha = 0; ficha < fichasEnRonda.length; ficha++) 
+        {
+            int fila = r.nextInt(btnFichas.length);
+            int columna = r.nextInt(btnFichas[0].length);
+            boolean seRepite = true;
+            while(seRepite)
+            {
+                if(btnFichas[fila][columna].getClientProperty("ficha") == null)
+                {
+                    btnFichas[fila][columna].putClientProperty("ficha", fichasEnRonda[ficha]);
+                    seRepite = false;
+                }
+                else
+                {
+                    fila = r.nextInt(btnFichas.length);
+                    columna = r.nextInt(btnFichas[0].length);
+                    seRepite = true;
+                }
+            }
+            mostrarFicha(btnFichas[fila][columna], fichasEnRonda[ficha]);        
+        }
+    }
+    
+    private void mostrarFicha(JButton botonSeleccionado, Ficha fichaSeleccionada)
+    {
+        String dirImagen = fichaSeleccionada.getDirImagen();
+        botonSeleccionado.setIcon(new ImageIcon(Class.class.getResource(dirImagen)));
+        botonSeleccionado.setDisabledIcon(new ImageIcon(Class.class.getResource(dirImagen)));
+    }
+    
+    private void ocultarFichas()
+    {
+        Timer timer = new Timer( 1000 , null);
+        timer.start();
+        timer.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent evt)
+            {
+                juegoMemorabble.disminuirTiempoMostrar();
+                actualizarTiempo();
+                if(juegoMemorabble.getTiempoMostrar() == 0)
+                {
+                    timer.stop();
+                    actualizarLabelMensaje();
+                    lblTiempoyFicha.setText("");
+                    lblTiempoyFicha.setBackground(Color.white);
+                    lblTiempoyFicha.setIcon(new ImageIcon(Class.class.getResource("/imagenesCondicion/"+juegoMemorabble.getCondicion()+".png")));
+                    for (JButton[] btnFicha : btnFichas) 
+                    {  
+                        for (JButton btnFicha1 : btnFicha) 
+                        {
+                            btnFicha1.setBorder(BorderFactory.createLineBorder(moradoClaro, 5));
+                            btnFicha1.setBackground(morado);
+                            btnFicha1.setIcon(null);
+                            btnFicha1.setEnabled(true); 
+                        }
+                    }
+                    btnFichas[0][0].setBorder(BorderFactory.createLineBorder(Color.black, 5));
+                    btnFichas[0][0].requestFocus();
+                }
+            }
+        });
+    }
+    
+    private void inicializarComponentesRonda()
+    {
+        Timer timer = new Timer( 1000 , null);
+        timer.start();
+        timer.setRepeats(false);
+        timer.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent evt)
+            {
+                juegoMemorabble.iniciarRonda();
+                for (JButton[] btnFicha : btnFichas) 
+                {
+                    for (JButton btnFicha1 : btnFicha) 
+                    {
+                        btnFicha1.setBorder(BorderFactory.createLineBorder(moradoClaro, 5));
+                        btnFicha1.setIcon(null);
+                        btnFicha1.setDisabledIcon(null);
+                    }
+                }
+                lblTiempoyFicha.setIcon(null);
+                lblTiempoyFicha.setBackground(morado);
+                lblTiempoyFicha.setText(""+juegoMemorabble.getTiempoMostrar());
+                lblMensaje.setText("OBSERVE LAS FIGURAS DETENIDAMENTE");
+                asignarFichas();
+                ocultarFichas();
+            }
+        });
+    }
         
+    private void cerrarJuego()
+    {
+        int respuesta;
+        respuesta = JOptionPane.showConfirmDialog(null,"¿Desea terminar el juego?", "Información",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(respuesta == JOptionPane.YES_OPTION)
+        {
+            juegoMemorabble.pararContarTiempoJuego();
+            mostrarResultados();
+        }
+    }
+    
+    private void mostrarResultados()
+    {
+        if(juegoMemorabble.getVidasJugador() != 0)
+        {
+            //VentanaResultados(JuegoMemorabble.getJugador());
+            dispose();
+        }
+        else
+        {
+            Timer timer = new Timer( 1000 , null);
+            timer.start();
+            timer.setRepeats(false);
+            timer.addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent evt)
+                {
+                    //VentanaResultados(JuegoMemorabble.getJugador());
+                    dispose();
+                }
+            });   
+        }   
+    }        
 }
