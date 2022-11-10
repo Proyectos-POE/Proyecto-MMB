@@ -129,7 +129,7 @@ public class VentanaParaQueSirve extends JFrame
     
     private void abrirMenuPrincipal() 
     {
-        VentanaMenu ventana = new VentanaMenu();
+        VentanaMenu menu = new VentanaMenu();
         dispose();
     }
 }
