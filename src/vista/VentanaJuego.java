@@ -40,10 +40,10 @@ import logica.Jugador;
  * @author Yenny Rivas Tello <yenny.rivas@correounivalle.edu.co>
  */
 public class VentanaJuego extends JFrame
-{
-    
+{  
     Color moradoClaro;
     Color morado;
+    
     private Fuentes tipoFuente;
     private FondoVentana jpFondo;
     private JPanel jpSeccionSuperior;
@@ -183,8 +183,7 @@ public class VentanaJuego extends JFrame
         this.getContentPane().add(jpSeccionInferior); 
         this.getContentPane().add(jpFondo); 
         setVisible(true);         
-        //ocultarFiguras(); 
-          
+        //ocultarFiguras();     
     }
      
     /*private void ocultarFiguras()
@@ -390,8 +389,7 @@ public class VentanaJuego extends JFrame
     }
     
     class ManejadorDeKeyBoard extends KeyAdapter
-    {
-        
+    {  
         @Override
         public void keyPressed(KeyEvent e) 
         {
@@ -495,6 +493,5 @@ public class VentanaJuego extends JFrame
                 }
             }
         }
-    }
-        
+    }    
 }
