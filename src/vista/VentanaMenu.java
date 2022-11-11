@@ -151,8 +151,8 @@ public class VentanaMenu extends JFrame
     
     private void mostrarInstrucciones() 
     {
-        //VentanaInstrucciones instrucciones = new VentanaInstrucciones;
-        //dispose();
+        VentanaInstrucciones instrucciones = new VentanaInstrucciones();
+        dispose();
     }
     
     private void iniciarJuego()

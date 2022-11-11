@@ -87,7 +87,7 @@ public class VentanaJuego extends JFrame
         
         btnSonido = new JButton();
         btnSonido.setBounds(10, 7,60, 60);
-        btnSonido.setIcon(new ImageIcon(Class.class.getResource("/imagenesSonido/sonidoOn.png")));
+        btnSonido.setIcon(new ImageIcon(getClass().getResource("/imagenesSonido/sonidoOn.png")));
         btnSonido.setName("btnSonido");
         btnSonido.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));
         btnSonido.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
@@ -113,7 +113,7 @@ public class VentanaJuego extends JFrame
         
         lblVidas = new JLabel();
         lblVidas.setBounds(590, 7, 120, 60);
-        lblVidas.setIcon(new ImageIcon(Class.class.getResource("/imagenesVidas/Corazones3.png")));
+        lblVidas.setIcon(new ImageIcon(getClass().getResource("/imagenesVidas/Corazones3.png")));
         lblVidas.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));  
         lblVidas.setForeground(Color.white);
         lblVidas.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
@@ -159,12 +159,12 @@ public class VentanaJuego extends JFrame
         
         btnTerminarJuego = new JButton();
         btnTerminarJuego.setBounds(10, 12,60, 60);
-        btnTerminarJuego.setIcon(new ImageIcon(Class.class.getResource("/imagenesCerrar/cerrarJuego.png")));
-        btnTerminarJuego.setName("btnSonido");
+        btnTerminarJuego.setIcon(new ImageIcon(getClass().getResource("/imagenesCerrar/cerrarJuego.png")));
+        //btnTerminarJuego.setName("btnTerminarJuego");
         btnTerminarJuego.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));
         btnTerminarJuego.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
         btnTerminarJuego.setBackground(morado);
-        btnTerminarJuego.putClientProperty("encendido", true);
+        //btnTerminarJuego.putClientProperty("encendido", true);
         btnTerminarJuego.addActionListener(new ManejadorDeEventos());
         
         lblMensaje = new JLabel("OBSERVE LAS FIGURAS DETENIDAMENTE",SwingConstants.CENTER);
@@ -205,12 +205,12 @@ public class VentanaJuego extends JFrame
             {
                 if((boolean)btnSonido.getClientProperty("encendido"))
                 {
-                   btnSonido.setIcon(new ImageIcon(Class.class.getResource("/imagenesSonido/sonidoOff.png"))); 
+                   btnSonido.setIcon(new ImageIcon(getClass().getResource("/imagenesSonido/sonidoOff.png"))); 
                    btnSonido.putClientProperty("encendido", false);
                 }
                 else
                 {
-                    btnSonido.setIcon(new ImageIcon(Class.class.getResource("/imagenesSonido/sonidoOn.png"))); 
+                    btnSonido.setIcon(new ImageIcon(getClass().getResource("/imagenesSonido/sonidoOn.png"))); 
                     btnSonido.putClientProperty("encendido", true);
                 }
                 JOptionPane.showMessageDialog(null,juegoMemorabble.getTiempoJuego(),"Advertencia", JOptionPane.ERROR_MESSAGE);        
@@ -433,7 +433,7 @@ public class VentanaJuego extends JFrame
     
     private void actualizarLabelVidas()
     {
-        lblVidas.setIcon(new ImageIcon(Class.class.getResource("/imagenesVidas/Corazones" + juegoMemorabble.getVidasJugador() + ".png")));
+        lblVidas.setIcon(new ImageIcon(getClass().getResource("/imagenesVidas/Corazones" + juegoMemorabble.getVidasJugador() + ".png")));
     }
     
     private void actualizarLabelMensaje()
@@ -471,8 +471,8 @@ public class VentanaJuego extends JFrame
     private void mostrarFicha(JButton botonSeleccionado, Ficha fichaSeleccionada)
     {
         String dirImagen = fichaSeleccionada.getDirImagen();
-        botonSeleccionado.setIcon(new ImageIcon(Class.class.getResource(dirImagen)));
-        botonSeleccionado.setDisabledIcon(new ImageIcon(Class.class.getResource(dirImagen)));
+        botonSeleccionado.setIcon(new ImageIcon(getClass().getResource(dirImagen)));
+        botonSeleccionado.setDisabledIcon(new ImageIcon(getClass().getResource(dirImagen)));
     }
     
     private void ocultarFichas()
@@ -492,7 +492,7 @@ public class VentanaJuego extends JFrame
                     actualizarLabelMensaje();
                     lblTiempoyFicha.setText("");
                     lblTiempoyFicha.setBackground(Color.white);
-                    lblTiempoyFicha.setIcon(new ImageIcon(Class.class.getResource("/imagenesCondicion/"+juegoMemorabble.getCondicion()+".png")));
+                    lblTiempoyFicha.setIcon(new ImageIcon(getClass().getResource("/imagenesCondicion/"+juegoMemorabble.getCondicion()+".png")));
                     for (JButton[] btnFicha : btnFichas) 
                     {  
                         for (JButton btnFicha1 : btnFicha) 

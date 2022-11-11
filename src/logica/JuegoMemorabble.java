@@ -69,7 +69,7 @@ public class JuegoMemorabble
         }
         else 
         {
-            jugador.disminuirVidas();
+            //jugador.disminuirVidas();
             jugador.aumentarFallos();
             return false;
         }
