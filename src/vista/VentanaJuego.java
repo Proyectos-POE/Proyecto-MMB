@@ -23,11 +23,20 @@ import javax.swing.border.LineBorder;
 import tipografiam.Fuentes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 import logica.Ficha;
 import logica.JuegoMemorabble;
 import logica.Jugador;
+import vista.Sonido;
+
 
 /**
  *
@@ -54,6 +63,9 @@ public class VentanaJuego extends JFrame
     private JButton btnTerminarJuego;
     private JLabel lblMensaje;
     private JLabel lblTiempoyFicha;
+    Sonido sonidoCorrecto;
+    Sonido sonidoIncorrecto;
+    Sonido musicaContador;
     
     public VentanaJuego(Jugador jugador)
     {
@@ -75,7 +87,12 @@ public class VentanaJuego extends JFrame
         morado = new Color(51,0, 102);
 
         tipoFuente= new Fuentes();
-        
+        sonidoCorrecto = new Sonido();
+        sonidoIncorrecto = new Sonido();
+        musicaContador = new Sonido();
+        musicaContador.iniciarSonido("/sonidos/musicaContador.wav");
+        musicaContador.setBucle();
+                
         jpFondo = new FondoVentana("/Fondo/FondoVentana.png");
         jpFondo.setSize(720,450);
         jpFondo.setLayout(null);
@@ -150,7 +167,7 @@ public class VentanaJuego extends JFrame
             }      
         }
         
-        //asignarFichas();
+        
           
         jpSeccionInferior = new JPanel();
         jpSeccionInferior.setBounds(0,365,720,85);
@@ -160,11 +177,10 @@ public class VentanaJuego extends JFrame
         btnTerminarJuego = new JButton();
         btnTerminarJuego.setBounds(10, 12,60, 60);
         btnTerminarJuego.setIcon(new ImageIcon(getClass().getResource("/imagenesCerrar/cerrarJuego.png")));
-        //btnTerminarJuego.setName("btnTerminarJuego");
+        btnTerminarJuego.setName("btnTerminarJuego");
         btnTerminarJuego.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));
         btnTerminarJuego.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
         btnTerminarJuego.setBackground(morado);
-        //btnTerminarJuego.putClientProperty("encendido", true);
         btnTerminarJuego.addActionListener(new ManejadorDeEventos());
         
         lblMensaje = new JLabel("OBSERVE LAS FIGURAS DETENIDAMENTE",SwingConstants.CENTER);
@@ -207,13 +223,31 @@ public class VentanaJuego extends JFrame
                 {
                    btnSonido.setIcon(new ImageIcon(getClass().getResource("/imagenesSonido/sonidoOff.png"))); 
                    btnSonido.putClientProperty("encendido", false);
+                   musicaContador.pararSonido();
+                   sonidoCorrecto.pararSonido();
+                   sonidoIncorrecto.pararSonido();
+                   musicaContador.setEstado(false);
+                   sonidoCorrecto.setEstado(false);
+                   sonidoIncorrecto.setEstado(false);
                 }
                 else
                 {
                     btnSonido.setIcon(new ImageIcon(getClass().getResource("/imagenesSonido/sonidoOn.png"))); 
                     btnSonido.putClientProperty("encendido", true);
+                    
+                    
+                    musicaContador.setEstado(true);
+                    sonidoCorrecto.setEstado(true);
+                    sonidoIncorrecto.setEstado(true);
+                    if(juegoMemorabble.getTiempoMostrar()!=0)
+                    {
+                     musicaContador.continuarSonido();   
+                    }
+                    
+                    sonidoCorrecto.continuarSonido();
+                    sonidoIncorrecto.continuarSonido();
                 }
-                JOptionPane.showMessageDialog(null,juegoMemorabble.getTiempoJuego(),"Advertencia", JOptionPane.ERROR_MESSAGE);        
+                       
             }
             else if(ae.getSource() == btnTerminarJuego)
             {
@@ -227,6 +261,8 @@ public class VentanaJuego extends JFrame
                 { 
                     actulizarLabelPuntuacion();
                     actualizarBotonCorrecto(botonSeleccionado, fichaSeleccioanda);
+                sonidoCorrecto.iniciarSonido("/sonidos/sonidoCorrecto.wav");
+
                     if(juegoMemorabble.sonTodasLasFicha())
                     { 
                         actualizarTodosLosBotones();
@@ -238,6 +274,8 @@ public class VentanaJuego extends JFrame
                     actualizarBotonIncorrecto(botonSeleccionado);
                     actualizarLabelVidas();
                     actualizarTodosLosBotones();
+                    sonidoIncorrecto.iniciarSonido("/sonidos/sonidoIncorrecto.wav");
+                    
                     if(juegoMemorabble.terminoJuego())
                     {
                         juegoMemorabble.pararContarTiempoJuego();
@@ -256,31 +294,60 @@ public class VentanaJuego extends JFrame
     {
         @Override       
         public void mouseEntered(MouseEvent arg0) 
-        {
-            if(((JButton) arg0.getSource()).isEnabled())
+        { 
+            if(arg0.getSource() instanceof JButton)
             {
-                Component botonSeleccionado = getFocusOwner();
-                if (botonSeleccionado instanceof JButton)
+                JButton botonMouseEntered = (JButton) arg0.getSource();
+                if(botonMouseEntered.isEnabled())
                 {
-                    JButton button = (JButton)botonSeleccionado;  
-                    if(button.getName().equals("btnFicha"))
+                    if(botonMouseEntered == btnSonido)
                     {
-                        button.setBorder(BorderFactory.createLineBorder(moradoClaro, 5));
-                    }               
+                        botonMouseEntered.setBorder(BorderFactory.createLineBorder(Color.black, 10)); 
+                    }
+                    else if(botonMouseEntered == btnTerminarJuego)
+                    {
+                        botonMouseEntered.setBorder(BorderFactory.createLineBorder(Color.black, 10)); 
+                    }
+                    else
+                    {
+                        Component componenteFoucs = getFocusOwner();
+                        if (componenteFoucs instanceof JButton)
+                        {
+                            JButton botonFocus = (JButton)componenteFoucs;  
+                            if(botonFocus.getName().equals("btnFicha"))
+                            {
+                                botonFocus.setBorder(BorderFactory.createLineBorder(moradoClaro, 5));
+                            }
+                        }
+                        botonMouseEntered.setBorder(BorderFactory.createLineBorder(Color.black, 5)); 
+                        botonMouseEntered.requestFocus();
+                    }
                 }
-                ((JButton) arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.black, 5));
-                ((JButton) arg0.getSource()).requestFocus();   
-            } 
+            }
         }
 
         @Override
         public void mouseExited(MouseEvent e) 
-        {  
-            if(((JButton) e.getSource()).isEnabled())
+        {    
+            if(e.getSource() instanceof JButton)
             {
-                ((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(moradoClaro, 5)); 
+                if(((JButton) e.getSource()).isEnabled())
+                {
+                    if(e.getSource() == btnSonido)
+                    {
+                        ((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(moradoClaro, 10)); 
+                    }
+                    else if(e.getSource() == btnTerminarJuego)
+                    {
+                        ((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(moradoClaro, 10)); 
+                    }
+                    else
+                    {
+                        ((JButton) e.getSource()).setBorder(BorderFactory.createLineBorder(moradoClaro, 5)); 
+                    }
+                }
             }
-        } 
+        }
     }
     
     class ManejadorDeKeyBoard extends KeyAdapter
@@ -489,6 +556,7 @@ public class VentanaJuego extends JFrame
                 if(juegoMemorabble.getTiempoMostrar() == 0)
                 {
                     timer.stop();
+                musicaContador.pararSonido();
                     actualizarLabelMensaje();
                     lblTiempoyFicha.setText("");
                     lblTiempoyFicha.setBackground(Color.white);
@@ -503,7 +571,6 @@ public class VentanaJuego extends JFrame
                             btnFicha1.setEnabled(true); 
                         }
                     }
-                    btnFichas[0][0].setBorder(BorderFactory.createLineBorder(Color.black, 5));
                     btnFichas[0][0].requestFocus();
                 }
             }
@@ -530,6 +597,7 @@ public class VentanaJuego extends JFrame
                         btnFicha1.setDisabledIcon(null);
                     }
                 }
+                musicaContador.continuarSonido();
                 lblTiempoyFicha.setIcon(null);
                 lblTiempoyFicha.setBackground(morado);
                 lblTiempoyFicha.setText(""+juegoMemorabble.getTiempoMostrar());
@@ -556,10 +624,12 @@ public class VentanaJuego extends JFrame
         if(juegoMemorabble.getVidasJugador() != 0)
         {
             //VentanaResultados(JuegoMemorabble.getJugador());
+            cerrarSonidos();
             dispose();
         }
         else
         {
+            
             Timer timer = new Timer( 1000 , null);
             timer.start();
             timer.setRepeats(false);
@@ -569,9 +639,19 @@ public class VentanaJuego extends JFrame
                 public void actionPerformed(ActionEvent evt)
                 {
                     //VentanaResultados(JuegoMemorabble.getJugador());
+                    cerrarSonidos();
                     dispose();
                 }
             });   
         }   
-    }        
-}
+    }
+    
+    private void cerrarSonidos()
+    {
+     musicaContador.cerrarSonido();
+     sonidoCorrecto.cerrarSonido();
+     sonidoIncorrecto.cerrarSonido();
+    }
+    }
+                  
+
