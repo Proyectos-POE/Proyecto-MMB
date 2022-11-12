@@ -4,6 +4,8 @@
  */
 package logica;
 
+import javax.swing.ImageIcon;
+
 /**
  * 
  * @author Nicolas Herrera <herrera.nicolas@correounivalle.edu.co>
@@ -14,14 +16,14 @@ public class Ficha
 {
     private String forma;
     private String color;
-    private String dirImagen;
+    private ImageIcon imagen;
     private boolean adivinada;
     
     public Ficha()
     {
         forma = "";
         color = "";
-        dirImagen = "";
+        imagen = null;
         adivinada = false;
     }
     
@@ -47,12 +49,12 @@ public class Ficha
     
     public void asignarImagen()
     {
-       this.dirImagen = "/imagenesFichas/"+forma+color+".png";
+       this.imagen = new ImageIcon(getClass().getResource("/imagenesFichas/"+forma+color+".png"));
     }
     
-    public String getDirImagen()
+    public ImageIcon getImagen()
     {
-        return dirImagen;
+        return imagen;
     }
     
     public void setAdivinaFicha(boolean adivinoFicha)

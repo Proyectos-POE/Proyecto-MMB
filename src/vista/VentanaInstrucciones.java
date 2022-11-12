@@ -10,57 +10,53 @@ package vista;
  * @author Samuel Galindo Cuevas <samuel.galindo@correounivalle.edu.co>
  * @author Yenny Rivas Tello <yenny.rivas@correounivalle.edu.co>
  */
+    import fondo.FondoVentana;
     import java.awt.Color;
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
     import java.awt.event.MouseAdapter;
     import java.awt.event.MouseEvent;
-        import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
+    import javax.swing.BorderFactory;
+    import javax.swing.ImageIcon;
     import javax.swing.JButton;
     import javax.swing.JFrame;
     import javax.swing.JLabel;
     import javax.swing.JPanel;
-    import javax.swing.JTextArea;
-    import javax.swing.JTextPane;
     import javax.swing.SwingConstants;
-    import javax.swing.SwingUtilities;
     import tipografiam.Fuentes;
-    import javax.swing.*;
 
-public class VentanaInstrucciones extends JFrame {
+public class VentanaInstrucciones extends JFrame 
+{
     
     Color moradoClaro;
     Color morado;
 
     Fuentes tipoFuente;
-    private FondoVentana jpFondo;
-    private JPanel jpImagen;
-    private JPanel jpInferior;
-    private JLabel text1;
-    private JLabel text2;
-    private JLabel text3;
-    private JLabel text4;
-    private JLabel text5;
-    private JButton btnSiguiente1;
-    private JButton btnSiguiente2;
-    private JButton btnSiguiente3;
-    private JButton btnSiguiente4;
-    private JButton btnAtras1;
-    private JButton btnAtras2;
-    private JButton btnAtras3;
-    private JButton btnAtras4;
+    private final FondoVentana jpFondo;
+    private JPanel jpSeccionSuperior;
+    private JPanel jpSeccionInferior;
+    private JPanel jpSeccionIzquierda;
+    private JPanel jpSeccionDerecha;
+    private JLabel lblImagenInstrucciones;
+    private JLabel lblNumeroPag;
+    private JLabel textRenglon1;
+    private JLabel textRenglon2;
+    private JLabel textRenglon3;
+    private JLabel textRenglon4;
+    private JLabel textRenglon5;
+    private JButton btnSiguientePag2;
+    private JButton btnSiguientePag3;
+    private JButton btnSiguientePag4;
+    private JButton btnSiguientePag5;
+    private JButton btnAtrasPag1;
+    private JButton btnAtrasPag2;
+    private JButton btnAtrasPag3;
+    private JButton btnAtrasPag4;
     private JButton btnMenuPrincipal;
-    private JLabel lblImg;
-    private JPanel jpizq;
-    private JPanel jpder;
-    private JLabel numero;
-
     
     public VentanaInstrucciones()
-    
     {
-        setTitle("Memorabble-Instrucciones");
+        setTitle("MEMORABBLE-INSTRUCCIONES");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
         setLocationRelativeTo(null);
@@ -76,33 +72,40 @@ public class VentanaInstrucciones extends JFrame {
         jpFondo.setSize(720,450);
         jpFondo.setLayout(null);
 
-        btnAtras1 = new JButton("ATRAS");
-        botonIzquierdo(btnAtras1);
-        btnSiguiente1 = new JButton("SIGUIENTE");
-        botonDerecho(btnSiguiente1);
-        btnAtras2 = new JButton("ATRAS");
-        botonIzquierdo(btnAtras2);
-        btnSiguiente2 = new JButton("SIGUIENTE");
-        botonDerecho(btnSiguiente2);
-        btnAtras3 = new JButton("ATRAS");
-        botonIzquierdo(btnAtras3);
-        btnSiguiente3 = new JButton("SIGUIENTE");
-        botonDerecho(btnSiguiente3);
-        btnAtras4 = new JButton("ATRAS");
-        botonIzquierdo(btnAtras4);
-        btnSiguiente4 = new JButton("SIGUIENTE");
-        botonDerecho(btnSiguiente4);
+        btnAtrasPag1 = new JButton("ATRAS");
+        botonIzquierdo(btnAtrasPag1);
+        
+        btnSiguientePag2 = new JButton("SIGUIENTE");
+        botonDerecho(btnSiguientePag2);
+        
+        btnAtrasPag2 = new JButton("ATRAS");
+        botonIzquierdo(btnAtrasPag2);
+        
+        btnSiguientePag3 = new JButton("SIGUIENTE");
+        botonDerecho(btnSiguientePag3);
+        
+        btnAtrasPag3 = new JButton("ATRAS");
+        botonIzquierdo(btnAtrasPag3);
+        
+        btnSiguientePag4 = new JButton("SIGUIENTE");
+        botonDerecho(btnSiguientePag4);
+        
+        btnAtrasPag4 = new JButton("ATRAS");
+        botonIzquierdo(btnAtrasPag4);
+        
+        btnSiguientePag5 = new JButton("SIGUIENTE");
+        botonDerecho(btnSiguientePag5);
+        
         inicializarComponentes();
     }
 
     private void inicializarComponentes() 
-    {
-        
-        jpizq = new JPanel();
-        jpizq.setSize(245,245);        
-        jpizq.setBounds(0,0, 170, 245);
-        jpizq.setLayout(null);
-        jpizq.setOpaque(false); 
+    {   
+        jpSeccionIzquierda = new JPanel();
+        jpSeccionIzquierda.setSize(245,245);        
+        jpSeccionIzquierda.setBounds(0,0, 170, 245);
+        jpSeccionIzquierda.setLayout(null);
+        jpSeccionIzquierda.setOpaque(false); 
         
         btnMenuPrincipal = new JButton("MENU PRINCIPAL");
         btnMenuPrincipal.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,12));
@@ -113,282 +116,251 @@ public class VentanaInstrucciones extends JFrame {
         btnMenuPrincipal.setFocusable(false);
         btnMenuPrincipal.addActionListener(new ManejadoraDeEventos());
         btnMenuPrincipal.addMouseListener(new ManejadoraDeMouse());
-        jpizq.add(btnMenuPrincipal);
+        jpSeccionIzquierda.add(btnMenuPrincipal);
         
-
-       
+        jpSeccionSuperior = new JPanel();
+        jpSeccionSuperior.setSize(736,293);        
+        jpSeccionSuperior.setBounds(170,10, 380, 245);
+        jpSeccionSuperior.setLayout(null);
+        jpSeccionSuperior.setOpaque(false); 
         
-        jpImagen = new JPanel();
-        jpImagen.setSize(736,293);        
-        jpImagen.setBounds(170,10, 380, 245);
-        jpImagen.setLayout(null);
-        jpImagen.setOpaque(false); 
+        lblImagenInstrucciones = new JLabel();
+        lblImagenInstrucciones.setBounds(0,0, 380, 245);
+        lblImagenInstrucciones.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen1.png")));
+        lblImagenInstrucciones.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
+        jpSeccionSuperior.add(lblImagenInstrucciones);
         
-        lblImg = new JLabel();
-        lblImg.setBounds(0,0, 380, 245);
-        lblImg.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen1.png")));
-        lblImg.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        jpImagen.add(lblImg);
+        jpSeccionInferior = new JPanel();
+        jpSeccionInferior.setSize(720,196);        
+        jpSeccionInferior.setBounds(40,260, 640, 190);
+        jpSeccionInferior.setLayout(null);
+        jpSeccionInferior.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
+        jpSeccionInferior.setBackground(morado);
         
-        jpInferior = new JPanel();
-        jpInferior.setSize(720,196);        
-        jpInferior.setBounds(40,260, 640, 190);
-        jpInferior.setLayout(null);
-        //jpInferior.setOpaque(false); 
-        jpInferior.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        jpInferior.setBackground(morado);
-
+        textRenglon1 = new JLabel( "En Memorabble aparecerán una serie de",SwingConstants.CENTER);
+        textRenglon1.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
+        textRenglon1.setBounds(0, 25, 650, 25);
+        textRenglon1.setForeground(Color.white);
+        textRenglon1.setBackground(morado);
+        jpSeccionInferior.add(textRenglon1);
         
-        text1 = new JLabel( "En Memorabble aparecerán una serie de",SwingConstants.CENTER);
-        text1.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
-        text1.setBounds(0, 25, 650, 25);
-        text1.setForeground(Color.white);
-        text1.setBackground(morado);
-        //text1.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        //text1.setFocusable(false);
-        jpInferior.add(text1);
+        textRenglon2 = new JLabel( "figuras de distintos colores sobre unas fichas.",SwingConstants.CENTER);
+        textRenglon2.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
+        textRenglon2.setBounds(0, 55, 650, 25);
+        textRenglon2.setForeground(Color.white);
+        textRenglon2.setFocusable(false);
+        jpSeccionInferior.add(textRenglon2);
         
-        text2 = new JLabel( "figuras de distintos colores sobre unas fichas.",SwingConstants.CENTER);
-        text2.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
-        text2.setBounds(0, 55, 650, 25);
-        text2.setForeground(Color.white);
-        text2.setBackground(morado);
-        //text2.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        text2.setFocusable(false);
-        jpInferior.add(text2);
+        textRenglon3 = new JLabel( "Al cabo de unos segundos, las figuras",SwingConstants.CENTER);
+        textRenglon3.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
+        textRenglon3.setBounds(0, 85, 650, 25);
+        textRenglon3.setForeground(Color.white);
+        textRenglon3.setFocusable(false);
+        jpSeccionInferior.add(textRenglon3);
         
-        text3 = new JLabel( "Al cabo de unos segundos, las figuras",SwingConstants.CENTER);
-        text3.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
-        text3.setBounds(0, 85, 650, 25);
-        text3.setForeground(Color.white);
-        //text3.setBackground(morado);
-        //text3.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        text3.setFocusable(false);
-        jpInferior.add(text3);
+        textRenglon4 = new JLabel( "desaparecerán y tendras que responder una",SwingConstants.CENTER);
+        textRenglon4.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
+        textRenglon4.setBounds(0, 115, 650, 25);
+        textRenglon4.setForeground(Color.white);
+        textRenglon4.setFocusable(false);
+        jpSeccionInferior.add(textRenglon4);
         
-        text4 = new JLabel( "desaparecerán y tendras que responder una",SwingConstants.CENTER);
-        text4.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
-        text4.setBounds(0, 115, 650, 25);
-        text4.setForeground(Color.white);
-        //text4.setBackground(morado);
-        //text4.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        text4.setFocusable(false);
-        jpInferior.add(text4);
+        textRenglon5 = new JLabel( "pregunta",SwingConstants.CENTER);
+        textRenglon5.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
+        textRenglon5.setBounds(0, 145, 650, 25);
+        textRenglon5.setForeground(Color.white);
+        textRenglon5.setFocusable(false);
+        jpSeccionInferior.add(textRenglon5);
         
-        text5 = new JLabel( "pregunta",SwingConstants.CENTER);
-        text5.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20));  
-        text5.setBounds(0, 145, 650, 25);
-        text5.setForeground(Color.white);
-        //text5.setBackground(morado);
-        //text5.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        text5.setFocusable(false);
-        jpInferior.add(text5);
+        jpSeccionDerecha = new JPanel();
+        jpSeccionDerecha.setSize(170,245);        
+        jpSeccionDerecha.setBounds(550,0, 170, 245);
+        jpSeccionDerecha.setLayout(null);
+        jpSeccionDerecha.setOpaque(false); 
         
-        jpder = new JPanel();
-        jpder.setSize(170,245);        
-        jpder.setBounds(550,0, 170, 245);
-        jpder.setLayout(null);
-        jpder.setOpaque(false); 
+        btnSiguientePag2.setVisible(true);
         
-        btnSiguiente1.setVisible(true);
+        lblNumeroPag = new JLabel("1/5");
+        lblNumeroPag.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,30));  
+        lblNumeroPag.setBounds(110, 0, 65, 65);
+        lblNumeroPag.setForeground(Color.white);
+        lblNumeroPag.setFocusable(false);
+        lblNumeroPag.setOpaque(false);
+        jpSeccionDerecha.add(lblNumeroPag);
         
-        numero = new JLabel("1/5");
-        numero.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,30));  
-        numero.setBounds(110, 0, 65, 65);
-        numero.setForeground(Color.white);
-        //text3.setBackground(morado);
-        //text3.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        numero.setFocusable(false);
-        numero.setOpaque(false);
-        jpder.add(numero);
+        btnSiguientePag2.setVisible(true);
+        jpSeccionDerecha.add(btnSiguientePag2);
         
-        btnSiguiente1.setVisible(true);
-        jpder.add(btnSiguiente1);
-        
-        
-        this.getContentPane().add(jpizq);
-        this.getContentPane().add(jpder);
-        this.getContentPane().add(jpImagen);
-        this.getContentPane().add(jpInferior);
+        this.getContentPane().add(jpSeccionIzquierda);
+        this.getContentPane().add(jpSeccionDerecha);
+        this.getContentPane().add(jpSeccionSuperior);
+        this.getContentPane().add(jpSeccionInferior);
         this.getContentPane().add(jpFondo);
         setVisible(true);
-
-        
     }
-    private void inicializarComponentes1()
-        {
-
-        btnSiguiente2.setVisible(false);
-        btnSiguiente3.setVisible(false);
-        btnSiguiente4.setVisible(false);
-        btnAtras1.setVisible(false);
-        btnAtras2.setVisible(false);
-        btnAtras3.setVisible(false);
-        btnAtras4.setVisible(false);
-        btnSiguiente1.setVisible(true);
+    private void inicializarComponentesPag1()
+    {
+        btnSiguientePag3.setVisible(false);
+        btnSiguientePag4.setVisible(false);
+        btnSiguientePag5.setVisible(false);
+        btnAtrasPag1.setVisible(false);
+        btnAtrasPag2.setVisible(false);
+        btnAtrasPag3.setVisible(false);
+        btnAtrasPag4.setVisible(false);
+        btnSiguientePag2.setVisible(true);
         
-        lblImg.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen1.png")));
+        lblImagenInstrucciones.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen1.png")));
         
-        text1.setText("En Memorabble aparecerán una serie de");
-        text2.setText("figuras de distintos colores sobre unas fichas.");
-        text3.setText("Al cabo de unos segundos, las figuras");
-        text4.setText("desaparecerán y tendras que responder una");
-        text5.setText("pregunta");
-        text4.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20)); 
-        text5.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20)); 
+        textRenglon1.setText("En Memorabble aparecerán una serie de");
+        textRenglon2.setText("figuras de distintos colores sobre unas fichas.");
+        textRenglon3.setText("Al cabo de unos segundos, las figuras");
+        textRenglon4.setText("desaparecerán y tendras que responder una");
+        textRenglon5.setText("pregunta");
         
-        numero.setText("1/5");
-        
+        lblNumeroPag.setText("1/5");    
     }
-    private void inicializarComponentes2()
-        {
+    private void inicializarComponentesPag2()
+    { 
+        btnSiguientePag2.setVisible(false);
+        btnSiguientePag4.setVisible(false);
+        btnSiguientePag5.setVisible(false);
         
-        btnSiguiente1.setVisible(false);
-        btnSiguiente3.setVisible(false);
-        btnSiguiente4.setVisible(false);
-        btnAtras2.setVisible(false);
-        btnAtras3.setVisible(false);
-        btnAtras4.setVisible(false);
-        btnSiguiente2.setVisible(true);
-        btnAtras1.setVisible(true);
-        jpder.add(btnSiguiente2);
-        jpizq.add(btnAtras1);
+        btnAtrasPag2.setVisible(false);
+        btnAtrasPag3.setVisible(false);
+        btnAtrasPag4.setVisible(false);
+        
+        btnSiguientePag3.setVisible(true);
+        btnAtrasPag1.setVisible(true);
+        
+        jpSeccionDerecha.add(btnSiguientePag3);
+        jpSeccionIzquierda.add(btnAtrasPag1);
 
-        lblImg.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen2.png")));
-        jpImagen.add(lblImg);
+        lblImagenInstrucciones.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen2.png")));
+        jpSeccionSuperior.add(lblImagenInstrucciones);
             
-        text1.setText("La pregunta aparecerá en la parte inferior de la");
-        text2.setText("pantalla cuando las figuras hayan");
-        text3.setText("desaparecido.");
-        text4.setText("Debes pulsar sobre la ficha que cumpla la");
-        text5.setText("condición expresada en la pregunta");
-        text4.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20)); 
-        text5.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20)); 
+        textRenglon1.setText("La pregunta aparecerá en la parte inferior de la");
+        textRenglon2.setText("pantalla cuando las figuras hayan");
+        textRenglon3.setText("desaparecido.");
+        textRenglon4.setText("Debes pulsar sobre la ficha que cumpla la");
+        textRenglon5.setText("condición expresada en la pregunta");
         
-        numero.setText("2/5");
-        
-        
+        lblNumeroPag.setText("2/5");   
     }
     
-        private void inicializarComponentes3()
-        {
+    private void inicializarComponentesPag3()
+    {
         
-        btnSiguiente1.setVisible(false);
-        btnSiguiente2.setVisible(false);
-        btnSiguiente4.setVisible(false);
-        btnAtras1.setVisible(false);
-        btnAtras3.setVisible(false);
-        btnAtras4.setVisible(false);
-        btnSiguiente3.setVisible(true);
-        btnAtras2.setVisible(true);
-        jpder.add(btnSiguiente3);
-        jpizq.add(btnAtras2);
+        btnSiguientePag2.setVisible(false);
+        btnSiguientePag3.setVisible(false);
+        btnSiguientePag5.setVisible(false);
         
-    
-        lblImg.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen3.png")));
-        jpImagen.add(lblImg);
+        btnAtrasPag1.setVisible(false);
+        btnAtrasPag3.setVisible(false);
+        btnAtrasPag4.setVisible(false);
+        btnSiguientePag4.setVisible(true);
+        btnAtrasPag2.setVisible(true);
         
-        text1.setText("¡OJO! Es posible que haya que pulsar más de");
-        text2.setText("una ficha...");
-        text3.setText("");
-        text4.setText("");
-        text5.setText("");
-        text4.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20)); 
-        text5.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20)); 
+        jpSeccionDerecha.add(btnSiguientePag4);
+        jpSeccionIzquierda.add(btnAtrasPag2);
         
-        numero.setText("3/5");
+        lblImagenInstrucciones.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen3.png")));
+        jpSeccionSuperior.add(lblImagenInstrucciones);
         
+        textRenglon1.setText("¡OJO! Es posible que haya que pulsar más de");
+        textRenglon2.setText("una ficha...");
+        textRenglon3.setText("");
+        textRenglon4.setText("");
+        textRenglon5.setText(""); 
         
+        lblNumeroPag.setText("3/5");   
     }
         
-    private void inicializarComponentes4()
-        {
+    private void inicializarComponentesPag4()
+    { 
+        btnSiguientePag2.setVisible(false);
+        btnSiguientePag3.setVisible(false);
+        btnSiguientePag4.setVisible(false);
         
-        btnSiguiente1.setVisible(false);
-        btnSiguiente2.setVisible(false);
-        btnSiguiente3.setVisible(false);
-        btnAtras1.setVisible(false);
-        btnAtras2.setVisible(false);
-        btnAtras4.setVisible(false);
-        btnSiguiente4.setVisible(true);
-        btnAtras3.setVisible(true);
-        jpder.add(btnSiguiente4);
-        jpizq.add(btnAtras3);
+        btnAtrasPag1.setVisible(false);
+        btnAtrasPag2.setVisible(false);
+        btnAtrasPag4.setVisible(false);
         
-    
-        lblImg.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen4.png")));
-        jpImagen.add(lblImg);
+        btnSiguientePag5.setVisible(true);
+        btnAtrasPag3.setVisible(true);
         
-        text1.setText("En el ejemplo propuesto se nos pide que pulsemos");
-        text2.setText("sobre las 3 fichas que contienen figuras");
-        text3.setText("de color azul");
-        text4.setText("");
-        text5.setText("");
-        text4.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20)); 
-        text5.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,20)); 
+        jpSeccionDerecha.add(btnSiguientePag5);
+        jpSeccionIzquierda.add(btnAtrasPag3);
+        
+        lblImagenInstrucciones.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen4.png")));
+        jpSeccionSuperior.add(lblImagenInstrucciones);
+        
+        textRenglon1.setText("En el ejemplo propuesto se nos pide que pulsemos");
+        textRenglon2.setText("sobre las 3 fichas que contienen figuras");
+        textRenglon3.setText("de color azul");
+        textRenglon4.setText("");
+        textRenglon5.setText("");
 
-        numero.setText("4/5");
-
+        lblNumeroPag.setText("4/5");
     }
     
-   private void inicializarComponentes5()
-        {
+    private void inicializarComponentesPag5()
+    {
+        btnSiguientePag2.setVisible(false);
+        btnSiguientePag3.setVisible(false);
+        btnSiguientePag4.setVisible(false);
+        btnSiguientePag5.setVisible(false);
         
-        btnSiguiente1.setVisible(false);
-        btnSiguiente2.setVisible(false);
-        btnSiguiente3.setVisible(false);
-        btnSiguiente4.setVisible(false);
-        btnAtras1.setVisible(false);
-        btnAtras2.setVisible(false);
-        btnAtras3.setVisible(false);
-        btnAtras4.setVisible(true);
-        jpizq.add(btnAtras4);
+        btnAtrasPag1.setVisible(false);
+        btnAtrasPag2.setVisible(false);
+        btnAtrasPag3.setVisible(false);
         
+        btnAtrasPag4.setVisible(true);
+        
+        jpSeccionIzquierda.add(btnAtrasPag4);
     
-        lblImg.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen5.png")));
-        jpImagen.add(lblImg);
+        lblImagenInstrucciones.setIcon(new ImageIcon(getClass().getResource("/imagenesInstrucciones/imagen5.png")));
+        jpSeccionSuperior.add(lblImagenInstrucciones);
         
+        textRenglon1.setText("Es importante que memorices formas,");
+        textRenglon2.setText("colores y posiciones de cada ficha.");
+        textRenglon3.setText("");
+        textRenglon4.setText("¡APROVECHA CADA SEGUNDO");
+        textRenglon5.setText("Y HAZ ALGO MEMORRABLE!");
         
-        text1.setText("Es importante que memorices formas,");
-        text2.setText("colores y posiciones de cada ficha.");
-        text3.setText("");
-        text4.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,30)); 
-        text4.setText("¡APROVECHA CADA SEGUNDO");
-        text5.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,30)); 
-        text5.setText("Y HAZ ALGO MEMORRABLE!");
-        
-        numero.setText("5/5");
-        
+        lblNumeroPag.setText("5/5");    
     }
         
-        private void botonDerecho(JButton boton)
+    private void botonDerecho(JButton boton)
+    {
+        if(boton!=null)
         {
-            if(boton!=null){
-        boton.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,12));
-        boton.setForeground(Color.white);
-        boton.setBounds(10,140,150,50);
-        boton.setBackground(Color.ORANGE.darker());
-        boton.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        boton.setFocusable(false);
-        boton.addActionListener(new ManejadoraDeEventos());
-        boton.addMouseListener(new ManejadoraDeMouse());
-        boton.setVisible(false);
+            boton.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,12));
+            boton.setForeground(Color.white);
+            boton.setBounds(10,140,150,50);
+            boton.setBackground(Color.ORANGE.darker());
+            boton.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
+            boton.setFocusable(false);
+            boton.addActionListener(new ManejadoraDeEventos());
+            boton.addMouseListener(new ManejadoraDeMouse());
+            boton.setVisible(false);
         }
-}
-        private void botonIzquierdo(JButton boton)
+    }
+    
+    private void botonIzquierdo(JButton boton)
+    {
+        if(boton!=null)
         {
-            if(boton!=null){
-        boton.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,12));
-        boton.setForeground(Color.white);
-        boton.setBounds(10,140,150,50);
-        boton.setBackground(Color.ORANGE.darker());
-        boton.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
-        boton.setFocusable(false);
-        boton.addActionListener(new ManejadoraDeEventos());
-        boton.addMouseListener(new ManejadoraDeMouse());
-        boton.setVisible(false);
+            boton.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,12));
+            boton.setForeground(Color.white);
+            boton.setBounds(10,140,150,50);
+            boton.setBackground(Color.ORANGE.darker());
+            boton.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
+            boton.setFocusable(false);
+            boton.addActionListener(new ManejadoraDeEventos());
+            boton.addMouseListener(new ManejadoraDeMouse());
+            boton.setVisible(false);
         }
-        }
+    }
     
     class ManejadoraDeEventos implements ActionListener
     {
@@ -397,56 +369,46 @@ public class VentanaInstrucciones extends JFrame {
         {
             if(evento.getSource() == btnMenuPrincipal)
             {                
-                abrirMenuPrincipal();
+                volverMenuPrincipal();
             }
-            
-            else if(evento.getSource() == btnAtras1)
+            else if(evento.getSource() == btnAtrasPag1)
             {
-                inicializarComponentes1();
-                repaint();
-
-            }
-            
-            else if(evento.getSource() == btnSiguiente1)
-            {
-                inicializarComponentes2();
+                inicializarComponentesPag1();
                 repaint();
             }
-            else if(evento.getSource() == btnAtras2)
+            else if(evento.getSource() == btnSiguientePag2)
             {
-                inicializarComponentes2();
-                repaint();
- 
-            }
-            
-            else if(evento.getSource() == btnSiguiente2)
-            {
-                inicializarComponentes3();
+                inicializarComponentesPag2();
                 repaint();
             }
-            
-            else if(evento.getSource() == btnAtras3)
+            else if(evento.getSource() == btnAtrasPag2)
             {
-                inicializarComponentes3();
+                inicializarComponentesPag2();
                 repaint();
-
-            }
-            
-            else if(evento.getSource() == btnSiguiente3)
+            }   
+            else if(evento.getSource() == btnSiguientePag3)
             {
-                inicializarComponentes4();
+                inicializarComponentesPag3();
+                repaint();
+            }           
+            else if(evento.getSource() == btnAtrasPag3)
+            {
+                inicializarComponentesPag3();
+                repaint();
+            }          
+            else if(evento.getSource() == btnSiguientePag4)
+            {
+                inicializarComponentesPag4();
                 repaint();
             }
-            else if(evento.getSource() == btnAtras4)
+            else if(evento.getSource() == btnAtrasPag4)
             {
-                inicializarComponentes4();
+                inicializarComponentesPag4();
                 repaint();
- 
             }
-            
-            else if(evento.getSource() == btnSiguiente4)
+            else if(evento.getSource() == btnSiguientePag5)
             {
-                inicializarComponentes5();
+                inicializarComponentesPag5();
                 repaint();
             }            
         }  
@@ -459,7 +421,6 @@ public class VentanaInstrucciones extends JFrame {
         {
             ((JButton) arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
         }
-
         @Override
         public void mouseExited(MouseEvent e) 
         {  
@@ -467,12 +428,11 @@ public class VentanaInstrucciones extends JFrame {
         } 
     }
     
-    private void abrirMenuPrincipal() 
+    private void volverMenuPrincipal() 
     {
-        VentanaMenu ventana = new VentanaMenu();
+        VentanaMenu menu = new VentanaMenu();
         dispose();
-    }
-    
+    }    
 }
  
 

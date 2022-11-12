@@ -4,12 +4,12 @@
  */
 package vista;
 
+import fondo.FondoVentana;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import logica.Jugador;
 import tipografiam.Fuentes;
 
@@ -53,7 +52,7 @@ public class VentanaMenu extends JFrame
 
     private void inicializarComponentes() 
     {    
-        setTitle("Memorabble-Menu");
+        setTitle("MEMORABBLE-MENU");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
         setLocationRelativeTo(null);

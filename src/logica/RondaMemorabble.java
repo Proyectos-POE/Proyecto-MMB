@@ -4,9 +4,12 @@
  */
 package logica;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import javax.swing.Timer;
 
 /**
  *
@@ -192,9 +195,8 @@ public class RondaMemorabble
         return tiempoMostrar;
     }
     
-    
     public void disminuirTiempoMostrar()
-    {   
+    {
         tiempoMostrar--;
     }
     
@@ -202,7 +204,7 @@ public class RondaMemorabble
     {
         if(nivelDificultad < 33)
         {
-            if(numeroRonda == (3 * (nivelDificultad+1)))
+            if(numeroRonda == (3 * (nivelDificultad + 1)))
             {
                 nivelDificultad++;
             }

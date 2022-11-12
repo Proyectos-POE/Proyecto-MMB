@@ -4,6 +4,8 @@
  */
 package vista;
 
+import sonidos.Sonido;
+import fondo.FondoVentana;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -23,20 +25,11 @@ import javax.swing.border.LineBorder;
 import tipografiam.Fuentes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 import logica.Ficha;
 import logica.JuegoMemorabble;
 import logica.Jugador;
-import vista.Sonido;
-
 
 /**
  *
@@ -46,11 +39,13 @@ import vista.Sonido;
  */
 public class VentanaJuego extends JFrame
 {  
-    Color moradoClaro;
-    Color morado;
-    
-    JuegoMemorabble juegoMemorabble;
+    private Color moradoClaro;
+    private Color morado;
+    private JuegoMemorabble juegoMemorabble;
     private Fuentes tipoFuente;
+    private Sonido sonidoCorrecto;
+    private Sonido sonidoIncorrecto;
+    private Sonido sonidoContador;
     private FondoVentana jpFondo;
     private JPanel jpSeccionSuperior;
     private JPanel jpSeccionMedia;
@@ -63,9 +58,7 @@ public class VentanaJuego extends JFrame
     private JButton btnTerminarJuego;
     private JLabel lblMensaje;
     private JLabel lblTiempoyFicha;
-    Sonido sonidoCorrecto;
-    Sonido sonidoIncorrecto;
-    Sonido musicaContador;
+    
     
     public VentanaJuego(Jugador jugador)
     {
@@ -77,7 +70,7 @@ public class VentanaJuego extends JFrame
     private void inicializarComponentes()
     {
         setTitle("MERMORABBLE");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setSize(736,489);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -89,9 +82,9 @@ public class VentanaJuego extends JFrame
         tipoFuente= new Fuentes();
         sonidoCorrecto = new Sonido();
         sonidoIncorrecto = new Sonido();
-        musicaContador = new Sonido();
-        musicaContador.iniciarSonido("/sonidos/musicaContador.wav");
-        musicaContador.setBucle();
+        sonidoContador = new Sonido();
+        sonidoContador.iniciarSonido("/sonidos/sonidoContador.wav");
+        sonidoContador.setBucle();
                 
         jpFondo = new FondoVentana("/Fondo/FondoVentana.png");
         jpFondo.setSize(720,450);
@@ -110,7 +103,9 @@ public class VentanaJuego extends JFrame
         btnSonido.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
         btnSonido.setBackground(morado);
         btnSonido.putClientProperty("encendido", true);
+        btnSonido.setFocusable(false);
         btnSonido.addActionListener(new ManejadorDeEventos());
+        btnSonido.addMouseListener(new ManejadorDeMouse());
                 
         lblNombre = new JLabel("NOMBRE: " + juegoMemorabble.getNombreJugador(),SwingConstants.CENTER);
         lblNombre.setBounds(80, 7, 240, 60);
@@ -166,8 +161,6 @@ public class VentanaJuego extends JFrame
                 jpSeccionMedia.add(btnFichas[fila][columna]);
             }      
         }
-        
-        
           
         jpSeccionInferior = new JPanel();
         jpSeccionInferior.setBounds(0,365,720,85);
@@ -181,7 +174,9 @@ public class VentanaJuego extends JFrame
         btnTerminarJuego.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));
         btnTerminarJuego.setBorder(BorderFactory.createLineBorder(moradoClaro, 10));
         btnTerminarJuego.setBackground(morado);
+        btnTerminarJuego.setFocusable(false);
         btnTerminarJuego.addActionListener(new ManejadorDeEventos());
+        btnTerminarJuego.addMouseListener(new ManejadorDeMouse());
         
         lblMensaje = new JLabel("OBSERVE LAS FIGURAS DETENIDAMENTE",SwingConstants.CENTER);
         lblMensaje.setFont(tipoFuente.fuente(tipoFuente.Marcador,1,15));  
@@ -221,33 +216,27 @@ public class VentanaJuego extends JFrame
             {
                 if((boolean)btnSonido.getClientProperty("encendido"))
                 {
-                   btnSonido.setIcon(new ImageIcon(getClass().getResource("/imagenesSonido/sonidoOff.png"))); 
-                   btnSonido.putClientProperty("encendido", false);
-                   musicaContador.pararSonido();
-                   sonidoCorrecto.pararSonido();
-                   sonidoIncorrecto.pararSonido();
-                   musicaContador.setEstado(false);
-                   sonidoCorrecto.setEstado(false);
-                   sonidoIncorrecto.setEstado(false);
+                    btnSonido.setIcon(new ImageIcon(getClass().getResource("/imagenesSonido/sonidoOff.png"))); 
+                    btnSonido.putClientProperty("encendido", false);
+                    sonidoContador.pararSonido();
+                    sonidoCorrecto.pararSonido();
+                    sonidoIncorrecto.pararSonido();
+                    sonidoContador.setEstado(false);
+                    sonidoCorrecto.setEstado(false);
+                    sonidoIncorrecto.setEstado(false);
                 }
                 else
                 {
                     btnSonido.setIcon(new ImageIcon(getClass().getResource("/imagenesSonido/sonidoOn.png"))); 
                     btnSonido.putClientProperty("encendido", true);
-                    
-                    
-                    musicaContador.setEstado(true);
+                    sonidoContador.setEstado(true);
                     sonidoCorrecto.setEstado(true);
                     sonidoIncorrecto.setEstado(true);
                     if(juegoMemorabble.getTiempoMostrar()!=0)
                     {
-                     musicaContador.continuarSonido();   
+                        sonidoContador.continuarSonido();   
                     }
-                    
-                    sonidoCorrecto.continuarSonido();
-                    sonidoIncorrecto.continuarSonido();
-                }
-                       
+                }            
             }
             else if(ae.getSource() == btnTerminarJuego)
             {
@@ -378,7 +367,7 @@ public class VentanaJuego extends JFrame
                     {
                         if(btnFichas[fila-1][columna].isEnabled())
                         {
-                            btnFichas[fila][columna].setBorder(BorderFactory.createLineBorder(moradoClaro, 5));;
+                            btnFichas[fila][columna].setBorder(BorderFactory.createLineBorder(moradoClaro, 5));
                             btnFichas[fila-1][columna].setBorder(BorderFactory.createLineBorder(Color.black, 5));
                             btnFichas[fila-1][columna].requestFocus();
                         }
@@ -537,9 +526,9 @@ public class VentanaJuego extends JFrame
     
     private void mostrarFicha(JButton botonSeleccionado, Ficha fichaSeleccionada)
     {
-        String dirImagen = fichaSeleccionada.getDirImagen();
-        botonSeleccionado.setIcon(new ImageIcon(getClass().getResource(dirImagen)));
-        botonSeleccionado.setDisabledIcon(new ImageIcon(getClass().getResource(dirImagen)));
+        ImageIcon Imagen = fichaSeleccionada.getImagen();
+        botonSeleccionado.setIcon(Imagen);
+        botonSeleccionado.setDisabledIcon(Imagen);
     }
     
     private void ocultarFichas()
@@ -556,7 +545,7 @@ public class VentanaJuego extends JFrame
                 if(juegoMemorabble.getTiempoMostrar() == 0)
                 {
                     timer.stop();
-                musicaContador.pararSonido();
+                    sonidoContador.pararSonido();
                     actualizarLabelMensaje();
                     lblTiempoyFicha.setText("");
                     lblTiempoyFicha.setBackground(Color.white);
@@ -579,7 +568,7 @@ public class VentanaJuego extends JFrame
     
     private void inicializarComponentesRonda()
     {
-        Timer timer = new Timer( 1000 , null);
+        Timer timer = new Timer( 2000 , null);
         timer.start();
         timer.setRepeats(false);
         timer.addActionListener(new ActionListener()
@@ -597,7 +586,7 @@ public class VentanaJuego extends JFrame
                         btnFicha1.setDisabledIcon(null);
                     }
                 }
-                musicaContador.continuarSonido();
+                sonidoContador.continuarSonido();
                 lblTiempoyFicha.setIcon(null);
                 lblTiempoyFicha.setBackground(morado);
                 lblTiempoyFicha.setText(""+juegoMemorabble.getTiempoMostrar());
@@ -630,7 +619,7 @@ public class VentanaJuego extends JFrame
         else
         {
             
-            Timer timer = new Timer( 1000 , null);
+            Timer timer = new Timer( 2000 , null);
             timer.start();
             timer.setRepeats(false);
             timer.addActionListener(new ActionListener()
@@ -648,10 +637,10 @@ public class VentanaJuego extends JFrame
     
     private void cerrarSonidos()
     {
-     musicaContador.cerrarSonido();
-     sonidoCorrecto.cerrarSonido();
-     sonidoIncorrecto.cerrarSonido();
+       sonidoContador.cerrarSonido();
+       sonidoCorrecto.cerrarSonido();
+       sonidoIncorrecto.cerrarSonido();
     }
-    }
+}
                   
 
