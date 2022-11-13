@@ -568,7 +568,7 @@ public class VentanaJuego extends JFrame
     
     private void inicializarComponentesRonda()
     {
-        Timer timer = new Timer( 2000 , null);
+        Timer timer = new Timer( 1000 , null);
         timer.start();
         timer.setRepeats(false);
         timer.addActionListener(new ActionListener()
@@ -619,7 +619,7 @@ public class VentanaJuego extends JFrame
         else
         {
             
-            Timer timer = new Timer( 2000 , null);
+            Timer timer = new Timer( 1000 , null);
             timer.start();
             timer.setRepeats(false);
             timer.addActionListener(new ActionListener()
