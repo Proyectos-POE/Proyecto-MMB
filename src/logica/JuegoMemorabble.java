@@ -144,16 +144,6 @@ public class JuegoMemorabble
         return jugador.getPuntuacion();
     }
     
-    public int getCantidadAciertosJugador()
-    {
-        return jugador.getCantidadAciertos();
-    }
-    
-    public int getCantidadFallosJugador()
-    {
-        return jugador.getCantidadFallos();
-    } 
-    
     public Jugador getJugador()
     {
      return jugador;
