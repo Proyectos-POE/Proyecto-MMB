@@ -612,7 +612,7 @@ public class VentanaJuego extends JFrame
     {
         if(juegoMemorabble.getVidasJugador() != 0)
         {
-            //VentanaResultados(JuegoMemorabble.getJugador());
+            VentanaResultados ventanaResultados = new VentanaResultados(juegoMemorabble.getJugador(),juegoMemorabble.getTiempoJuego());
             cerrarSonidos();
             dispose();
         }
@@ -627,7 +627,7 @@ public class VentanaJuego extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent evt)
                 {
-                    //VentanaResultados(JuegoMemorabble.getJugador());
+                     VentanaResultados ventanaResultados = new VentanaResultados(juegoMemorabble.getJugador(),juegoMemorabble.getTiempoJuego());
                     cerrarSonidos();
                     dispose();
                 }
