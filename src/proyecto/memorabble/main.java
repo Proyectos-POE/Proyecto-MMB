@@ -5,6 +5,7 @@
 package proyecto.memorabble;
 
 import vista.VentanaMenu;
+import vista.VentanaResultados;
 
 /**
  *
