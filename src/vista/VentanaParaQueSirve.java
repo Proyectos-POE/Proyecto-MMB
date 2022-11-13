@@ -4,7 +4,9 @@
  */
 package vista;
 
+import fondo.FondoVentana;
 import java.awt.Color;
+import static java.awt.Component.RIGHT_ALIGNMENT;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -43,7 +45,7 @@ public class VentanaParaQueSirve extends JFrame
 
     private void inicializarComponentes() 
     {
-        setTitle("Memorabble-Para Que Sirve");
+        setTitle("MEMORABBLE-PARAQUESIRVE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(736,489);
         setLocationRelativeTo(null);

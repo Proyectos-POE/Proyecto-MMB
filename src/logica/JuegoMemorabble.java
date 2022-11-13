@@ -152,5 +152,10 @@ public class JuegoMemorabble
     public int getCantidadFallosJugador()
     {
         return jugador.getCantidadFallos();
-    }     
+    } 
+    
+    public Jugador getJugador()
+    {
+     return jugador;
+    }    
 }
