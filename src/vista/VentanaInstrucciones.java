@@ -325,7 +325,7 @@ public class VentanaInstrucciones extends JFrame
         textRenglon2.setText("colores y posiciones de cada ficha.");
         textRenglon3.setText("");
         textRenglon4.setText("¡APROVECHA CADA SEGUNDO");
-        textRenglon5.setText("Y HAZ ALGO MEMORRABLE!");
+        textRenglon5.setText("Y HAZ ALGO MEMORABBLE!");
         
         lblNumeroPag.setText("5/5");    
     }
