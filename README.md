@@ -1,4 +1,4 @@
-# Miniproyecto No. 2
+# Proyecto-MMB
 **Tema: GUI - MouseListener - KeyListener**
 
 El departamento de educación y aprendizaje de Univalle, requiere construir un software que permita aplicar en su proceso de enseñanza, que les permita a los estudiantes entrenar la capacidad de codificación y recuerdo de información visual y espacial.
